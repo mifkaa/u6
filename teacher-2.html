@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Аня Бондарева — хореограф</title>
+    <style>
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Helvetica Neue', sans-serif;
+            background-color: #ffffff;
+            color: #111111;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ========== TYPOGRAPHY ========== */
+        h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.25rem;
+        }
+
+        h2 {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #888888;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .subhead {
+            font-size: 0.9rem;
+            color: #666666;
+            margin-bottom: 2rem;
+            border-left: 2px solid #e0e0e0;
+            padding-left: 1rem;
+        }
+
+        /* ========== LAYOUT ========== */
+        .back-bar {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid #f0f0f0;
+            padding: 0.75rem 1.5rem;
+            z-index: 100;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: none;
+            border: none;
+            font-size: 0.875rem;
+            color: #444444;
+            cursor: pointer;
+            padding: 0.5rem 0;
+            transition: color 0.2s;
+            font-weight: 450;
+        }
+
+        .back-button:hover {
+            color: #000000;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem 4rem;
+        }
+
+        /* ========== TABS (минималистичные) ========== */
+        .tabs {
+            display: flex;
+            gap: 0.25rem;
+            margin: 2rem 0 2rem;
+            border-bottom: 1px solid #eeeeee;
+            padding-bottom: 0;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 0.75rem 1rem;
+            font-size: 0.875rem;
+            font-weight: 450;
+            color: #888888;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .tab-btn.active {
+            color: #111111;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: #111111;
+        }
+
+        .tab-btn:hover:not(.active) {
+            color: #444444;
+        }
+
+        /* ========== TAB CONTENT ========== */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ========== TYPOGRAPHY & TEXT ========== */
+        .lead {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #222222;
+            margin-bottom: 1.5rem;
+        }
+
+        .text-block {
+            margin-bottom: 2rem;
+        }
+
+        .text-block p {
+            font-size: 0.9375rem;
+            color: #333333;
+            margin-bottom: 1rem;
+        }
+
+        /* Стили для списков */
+        .list-clean {
+            list-style: none;
+            padding: 0;
+        }
+
+        .list-clean li {
+            font-size: 0.875rem;
+            color: #444444;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f5f5f5;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .list-clean li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: #cccccc;
+        }
+
+        /* Бейджи (чистые, без фона) */
+        .badge-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 0.75rem;
+            margin: 1rem 0 1.5rem;
+        }
+
+        .badge {
+            font-size: 0.75rem;
+            color: #666666;
+            letter-spacing: -0.01em;
+        }
+
+        .badge:not(:last-child)::after {
+            content: '·';
+            margin-left: 0.75rem;
+            color: #dddddd;
+        }
+
+        /* Цитата */
+        .quote {
+            font-size: 0.875rem;
+            font-style: normal;
+            color: #888888;
+            padding: 1rem 0;
+            margin: 1.5rem 0;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        /* Достижения (минималистично) */
+        .achievement-item {
+            font-size: 0.875rem;
+            color: #333333;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .team-group {
+            margin-bottom: 2rem;
+        }
+
+        .team-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin: 1.25rem 0 0.75rem;
+            color: #111111;
+        }
+
+        .team-name:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Разделитель */
+        .separator {
+            width: 32px;
+            height: 1px;
+            background: #e0e0e0;
+            margin: 1.5rem 0;
+        }
+
+        /* ========== MOBILE ========== */
+        @media (max-width: 600px) {
+            .container {
+                padding: 1.5rem 1.25rem 3rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .back-bar {
+                padding: 0.5rem 1rem;
+            }
+
+            .tabs {
+                margin: 1.5rem 0 1rem;
+            }
+
+            .tab-btn {
+                padding: 0.6rem 0.75rem;
+                font-size: 0.8125rem;
+            }
+
+            .badge {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* ========== UTILS ========== */
+        .muted {
+            color: #888888;
+            font-size: 0.8125rem;
+        }
+    </style>
+</head>
+<body>
+
+<!-- НАВИГАЦИЯ НАЗАД -->
+<div class="back-bar">
+    <button class="back-button" onclick="goBack()">
+        ← Назад
+    </button>
+</div>
+
+<div class="container">
+    <!-- ЗАГОЛОВОК -->
+    <h1>Аня Бондарева</h1>
+    <div class="subhead">Хореограф, руководитель трёх команд, танцор</div>
+
+    <!-- ТАБЫ (минимал) -->
+    <div class="tabs">
+        <button class="tab-btn active" data-tab="about">Биография</button>
+        <button class="tab-btn" data-tab="experience">Обучение</button>
+        <button class="tab-btn" data-tab="achievements">Достижения</button>
+        <button class="tab-btn" data-tab="teams">Команды</button>
+    </div>
+
+    <!-- ========== ВКЛАДКА 1: БИОГРАФИЯ ========== -->
+    <div id="tab-about" class="tab-content active">
+        <p class="lead">19 лет в танце, 8 лет преподавания. Три команды, десятки стилей и сотни учениц.</p>
+
+        <div class="text-block">
+            <p>Аня руководит командами «Какая-то crew», «Annygma» и «c.». За годы она освоила больше десятка направлений: от hip-hop и vogue до contemporary и high heels.</p>
+            <p>На тренировках делает акцент на музыкальность, координацию и импровизацию. Регулярно вывозит команды на крупные чемпионаты — от городских до всероссийских.</p>
+        </div>
+
+        <div class="separator"></div>
+
+        <h2>Стили</h2>
+        <div class="badge-grid">
+            <span class="badge">hip-hop</span>
+            <span class="badge">jazz funk</span>
+            <span class="badge">afro</span>
+            <span class="badge">popping</span>
+            <span class="badge">house</span>
+            <span class="badge">vogue</span>
+            <span class="badge">dancehall</span>
+            <span class="badge">waacking</span>
+            <span class="badge">contemporary</span>
+            <span class="badge">high heels</span>
+            <span class="badge">breaking</span>
+        </div>
+
+        <div class="quote">
+            «Обучать = учиться вдвойне»
+        </div>
+    </div>
+
+    <!-- ========== ВКЛАДКА 2: ОБУЧЕНИЕ ========== -->
+    <div id="tab-experience" class="tab-content">
+        <h2>Лагеря и интенсивы</h2>
+        <ul class="list-clean">
+            <li>frame up dance festival workshops</li>
+            <li>frame up convention</li>
+            <li>frame up sexy edition</li>
+        </ul>
+
+        <h2 style="margin-top: 2rem;">Онлайн-курсы</h2>
+        <ul class="list-clean">
+            <li>«23 см» — Ирина Подшивалова</li>
+            <li>«Почерк» — Аня Устинова-Сидорова</li>
+            <li>«Моя система координат» — Кирилл Цыганов</li>
+            <li>Разборы хореографии: Смирнова, Попова, Юрасова, Подшивалова</li>
+        </ul>
+
+        <h2 style="margin-top: 2rem;">Мастер-классы</h2>
+        <div class="badge-grid">
+            Олег Клевакин, Софья Мартьянова, Ирина Подшивалова, Дарья Попова, Мария Смирнова, Кирилл Цыганов, Кирилл Захаров, Алексей Арапов, Алина Барилова, Саша Царёв, Мария Барышникова, Настя Юрасова, Крис Белова, Лиза Сергеева, Баина Басанова, Андрей Николаев, Саша Буйный, Антон Лушичев, Ксения Горячева, Соня Мисник, Юлия Мурашко, Дарья Кравчук, Анна Тарасенко, Денис Матэ, Дамьен, Animal Whiphead, Злата Масло, Dre10, Борис Шерайзин, Аня Устинова-Сидорова, Августа Волченкова, Настя Багдасарова, Настя Вядро, Инна Аполонская, Алексей Мечетный, Алексей Симба, Марк Куклин, Катя Реймерс, Вахтанг Хурцилава, Ramon, Иван Маслов
+        </div>
+    </div>
+
+    <!-- ========== ВКЛАДКА 3: ДОСТИЖЕНИЯ ========== -->
+    <div id="tab-achievements" class="tab-content">
+        <div class="achievement-item">1 место — VNУTRИ CHAMP (solo ladies)</div>
+    </div>
+
+    <!-- ========== ВКЛАДКА 4: КОМАНДЫ ========== -->
+    <div id="tab-teams" class="tab-content">
+        <div class="team-group">
+            <div class="team-name">Какая-то crew</div>
+            <ul class="list-clean">
+                <li>UPGRADE COMPETITION — 3 место (Best Team Adults Beg)</li>
+                <li>DANCE WAVE — 3 место (Best Dance Show Street)</li>
+                <li>UPGRADE COMPETITION — 3 место (Best Team Adults Pro)</li>
+                <li>DANCE WAVE — 1 место (Best Dance Show Choreo)</li>
+                <li>GS CHAMP — 2 место (No shoes Adults Crew)</li>
+                <li>база чемп — 2 место (Show Advanced)</li>
+                <li>VNУTRИ CHAMP — 1 место (Show Adults Pro)</li>
+                <li>DANCE WAVE — 1 место (Танцевальное шоу 16+)</li>
+            </ul>
+        </div>
+
+        <div class="team-group">
+            <div class="team-name">A(FFE)CTION</div>
+            <ul class="list-clean">
+                <li>UPGRADE COMPETITION — 1 место (Mini Crew Adults)</li>
+                <li>SUGAR DANCE CHAMP — 2 место (Mini Crew Adults)</li>
+                <li>DANCE WAVE — 3 место (Mini Crew Adults)</li>
+                <li>база чемп — 1 место (Mini Crew Adults)</li>
+            </ul>
+        </div>
+
+        <div class="team-group">
+            <div class="team-name">c.</div>
+            <ul class="list-clean">
+                <li>DANCE WAVE — 1 место (Ladies Show)</li>
+            </ul>
+        </div>
+
+        <div class="team-group">
+            <div class="team-name">Annygma</div>
+            <ul class="list-clean">
+                <li>SUGAR DANCE CHAMP — 1 место (High heels Group)</li>
+                <li>UPGRADE COMPETITION — 1 место (Best Show Ladies Pro)</li>
+                <li>Грязь. Чемп — 3 место (лучшая начинающая фрейм ап команда)</li>
+                <li>DANCE WAVE — 1 место (Ladies Styles Show)</li>
+                <li>база чемп — 3 место (Show Ladies)</li>
+                <li>For You Fest — 1 место (Ladies Show Pro)</li>
+                <li>база чемп — 1 место (Show Ladies)</li>
+                <li>DANCE WAVE — 2 место (Ladies Show)</li>
+                <li>VNУTRИ CHAMP — 1 место (Ladies Show Pro)</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    function goBack() {
+        window.location.href = 'index.html#teachers';
+    }
+
+    // Табы
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const tabId = btn.getAttribute('data-tab');
+            
+            tabBtns.forEach(b => b.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            
+            btn.classList.add('active');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            
+            localStorage.setItem('teacherActiveTab', tabId);
+        });
+    });
+
+    const savedTab = localStorage.getItem('teacherActiveTab');
+    if (savedTab) {
+        const tabToOpen = document.querySelector(`.tab-btn[data-tab="${savedTab}"]`);
+        if (tabToOpen) tabToOpen.click();
+    }
+</script>
+
+</body>
+</html>
